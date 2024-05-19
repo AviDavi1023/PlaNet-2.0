@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from .forms import SignUpForm
+from .models import Plant
 
 def home(request):
     return render(request, 'home.html', {})
@@ -50,3 +51,8 @@ def register_user(request):
        form = SignUpForm
 
    return render(request, 'register.html', {"form": form})
+
+def dashboard(request):
+    plants = Plant.objects.filter(user_id=request.user.id)
+    print(plants)
+    return render(request, "dashboard.html", {"request_method":request.method, "plants":plants})

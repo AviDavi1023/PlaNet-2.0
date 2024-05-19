@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% load static %}
+
+<h1>Dashboard</h1>
+
+{% if plants %}
+  {% for plant in plants %}
+    <div class="card" style="width: 60%;">
+      <div class="card-body">
+      <h2 class="card-title">{{plant.name}}</h2>
+      <h3 class="card-subtitle">{{plant.location}}</h3>
+      <p class="card-text">{{plant.comment}}</p>
+      </div>
+    </div>
+  {% endfor %}
+{% endif %}
+
+
+{% endblock %}
