@@ -33,7 +33,7 @@ media/
 *.settings
 
 # Ignore the virtual environment
-.env/
+venv/
  
 # Ignore pipenv virtual environment
 .Pipfile
