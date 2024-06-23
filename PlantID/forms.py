@@ -37,9 +37,12 @@ class SignUpForm(UserCreationForm):
        self.fields['password2'].label = ''
        self.fields['password2'].help_text = '<span class="form-text text-muted"><small>Enter the same password as before, for verification.</small></span>'
 
-class Plant(ModelForm):
+class PlantForm(ModelForm):
     
     class Meta:
         model = Plant
         fields = {'image'}
         labels = {'image':''}
+
+class Upload_Form(forms.Form):
+    image = forms.ImageField(label='Select an Image')

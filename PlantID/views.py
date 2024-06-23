@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
-from .forms import SignUpForm
+from .forms import SignUpForm, PlantForm
 from .models import Plant
+from django.http import HttpResponseRedirect
 
 def home(request):
     return render(request, 'home.html', {})
@@ -10,6 +11,15 @@ def about(request):
     return render(request, 'about.html', {})
 
 def upload(request):
+    if request.method=='POST':
+        form=(request.POST, request.FILES)
+        print('I got here! Or something like that.')
+        #if form.is_valid():
+        plant=form.save()
+        plant.owner=request.user.id
+        print("I got here too!")
+        plant.save()
+        return HttpResponseRedirect('home')
     return render(request, 'upload.html', {})
 
 def howtouse(request):
