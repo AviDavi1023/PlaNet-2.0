@@ -12,14 +12,12 @@ def about(request):
 
 def upload(request):
     if request.method=='POST':
-        form=(request.POST, request.FILES)
-        print('I got here! Or something like that.')
-        #if form.is_valid():
-        plant=form.save()
-        plant.owner=request.user.id
-        print("I got here too!")
-        plant.save()
-        return HttpResponseRedirect('home')
+        form=PlantForm(request.POST, request.FILES)
+        if form.is_valid():
+            plant=form.save(commit=False)
+            plant.user=request.user
+            plant.save()
+            return HttpResponseRedirect('dashboard')
     return render(request, 'upload.html', {})
 
 def howtouse(request):
@@ -64,5 +62,4 @@ def register_user(request):
 
 def dashboard(request):
     plants = Plant.objects.filter(user_id=request.user.id)
-    print(plants)
     return render(request, "dashboard.html", {"request_method":request.method, "plants":plants})

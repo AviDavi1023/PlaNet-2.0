@@ -45,4 +45,6 @@ class PlantForm(ModelForm):
         labels = {'image':''}
 
 class Upload_Form(forms.Form):
-    image = forms.ImageField(label='Select an Image')
+    location = forms.CharField(label = 'Where did you find it?')
+    comment = forms.Textarea(placeholder = 'Any comments?')
+    image = forms.ImageField(placeholder ='Select an Image')
